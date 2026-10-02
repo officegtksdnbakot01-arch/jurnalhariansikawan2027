@@ -490,9 +490,9 @@
           </span>
           <select id="filterStatusRiwayat" onchange="filterRiwayatTabel()" class="px-3 py-2 border border-gray-300 rounded-xl text-xs bg-white font-medium text-gray-700 outline-none cursor-pointer">
             <option value="">Semua Status</option>
-            <option value="PNS / ASN">PNS / ASN</option>
+            <option value="ASN">ASN</option>
             <option value="PPPK">PPPK</option>
-            <option value="Honor Sekolah">Honor Sekolah</option>
+            <option value="PPPK PW">PPPK PW/option>
           </select>
         </div>
       </div>
@@ -1475,7 +1475,7 @@
       document.getElementById("newNama").value = p.name || "";
       document.getElementById("newJabatan").value = p.jabatan || "Guru Kelas / Pendidik";
       document.getElementById("newPangkat").value = p.pangkat || "";
-      document.getElementById("newStatus").value = p.status || "PNS / ASN";
+      document.getElementById("newStatus").value = p.status || "ASN";
       document.getElementById("valFotoNew").value = p.poto || "";
       document.getElementById("valTtdNew").value = p.ttd || "";
 
@@ -1494,7 +1494,7 @@
       document.getElementById("newNama").value = "";
       document.getElementById("newJabatan").value = "Guru Kelas / Pendidik";
       document.getElementById("newPangkat").value = "";
-      document.getElementById("newStatus").value = "PNS / ASN";
+      document.getElementById("newStatus").value = "ASN";
       document.getElementById("valFotoNew").value = "";
       document.getElementById("valTtdNew").value = "";
 
@@ -1560,10 +1560,10 @@
         let statusBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-gray-100 text-gray-700">${p.status}</span>`;
         if (p.status === "PPPK") {
           statusBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-300">PPPK</span>`;
-        } else if (p.status === "PNS / ASN") {
-          statusBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-300">PNS / ASN</span>`;
-        } else if (p.status === "Honor Sekolah") {
-          statusBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-300">Honor Sekolah</span>`;
+        } else if (p.status === "ASN") {
+          statusBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-blue-50 text-blue-700 border border-blue-300">ASN</span>`;
+        } else if (p.status === "PPPK PW") {
+          statusBadge = `<span class="px-2 py-0.5 rounded text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-300">PPPK PW</span>`;
         }
 
         tb.innerHTML += `
@@ -2063,10 +2063,10 @@
         let statusBadge = `<span class="bg-gray-100 text-gray-700 border border-gray-300 font-semibold px-2.5 py-0.5 rounded text-xs">${row.status || '-'}</span>`;
         if (row.status === "PPPK") {
           statusBadge = `<span class="bg-emerald-50 text-emerald-700 border border-emerald-300 font-semibold px-2.5 py-0.5 rounded text-xs">PPPK</span>`;
-        } else if (row.status === "PNS / ASN") {
-          statusBadge = `<span class="bg-blue-50 text-blue-700 border border-blue-300 font-semibold px-2.5 py-0.5 rounded text-xs">PNS / ASN</span>`;
-        } else if (row.status === "Honor Sekolah") {
-          statusBadge = `<span class="bg-amber-50 text-amber-700 border border-amber-300 font-semibold px-2.5 py-0.5 rounded text-xs">Honor Sekolah</span>`;
+        } else if (row.status === "ASN") {
+          statusBadge = `<span class="bg-blue-50 text-blue-700 border border-blue-300 font-semibold px-2.5 py-0.5 rounded text-xs">ASN</span>`;
+        } else if (row.status === "PPPK PW") {
+          statusBadge = `<span class="bg-amber-50 text-amber-700 border border-amber-300 font-semibold px-2.5 py-0.5 rounded text-xs">PPPK PW</span>`;
         }
 
         const tr = document.createElement("tr");
@@ -2525,8 +2525,8 @@
         const bgClass = idx % 2 === 0 ? 'bg-white' : 'bg-zebra';
         let badgeClass = 'td-center';
         if (p.status === 'PPPK') badgeClass = 'badge-pppk';
-        else if (p.status === 'PNS / ASN') badgeClass = 'badge-pns';
-        else if (p.status === 'Honor Sekolah') badgeClass = 'badge-honor';
+        else if (p.status === 'ASN') badgeClass = 'badge-pns';
+        else if (p.status === 'PPPK PW') badgeClass = 'badge-pppk pw';
 
         // Format rumus / Kunci-Nilai Base64
         const fotoVal = p.poto && p.poto.trim() ? (p.poto.startsWith('data:') ? p.poto : `data:image/png;base64,${p.poto}`) : 'data:image/png;base64,';
@@ -2660,8 +2660,8 @@
         const bgClass = idx % 2 === 0 ? 'bg-white' : 'bg-zebra';
         let badgeClass = 'td-center';
         if (row.status === 'PPPK') badgeClass = 'badge-pppk';
-        else if (row.status === 'PNS / ASN') badgeClass = 'badge-pns';
-        else if (row.status === 'Honor Sekolah') badgeClass = 'badge-honor';
+        else if (row.status === 'ASN') badgeClass = 'badge-asn';
+        else if (row.status === 'PPPK PW') badgeClass = 'badge-pppk pw';
 
         const listUraian = (row.kegiatanList || []).map((k, kIdx) => {
           return `${kIdx + 1}. [${k.jamMulai}.${k.menitMulai} - ${k.jamSelesai}.${k.menitSelesai}] ${k.uraian || '-'}`;
