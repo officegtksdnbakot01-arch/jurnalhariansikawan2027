@@ -78,7 +78,7 @@ function getDataPegawaiFromSheet() {
       sheet.appendRow(["No", "NIP / NI PPPK", "Nama Pegawai", "Jabatan", "Pangkat / Gol", "Status", "Foto Pegawai", "TTD Pegawai"]);
       sheet.getRange(1, 2, 100, 1).setNumberFormat("@"); // Format kolom NIP sebagai teks murni
       sheet.appendRow(["1", "198105102025211008", "SAMSUDIN", "Pengadministrasi Perkantoran", "V", "PPPK", "", ""]);
-      sheet.appendRow(["2", "1978082020008012005", "LAILATUL FAJRIAH, S.Pd.SD", "Kepala Sekolah", "Penata Tk. I, III/d", "PNS / ASN", "", ""]);
+      sheet.appendRow(["2", "197808202008012005", "LAILATUL FAJRIAH, S.Pd.SD.", "Kepala Sekolah", "Penata Tk. I, III/d", "ASN", "", ""]);
     }
     
     var data = sheet.getDataRange().getValues();
@@ -222,21 +222,54 @@ function simpanDataSekolah(payload) {
 function getDataSekolahFromSheet() {
   try {
     var ss = SpreadsheetApp.getActiveSpreadsheet();
-    if (!ss) return null;
+    var defaultData = {
+      namaKepala: "LAILATUL FAJRIAH, S.Pd.SD.",
+      nipKepala: "197808202008012005",
+      ttdKepala: "",
+      stempelSekolah: "",
+      kopSekolah: ""
+    };
+    if (!ss) return defaultData;
+
     var sheet = ss.getSheetByName("Data Sekolah");
-    if (!sheet) return null;
+    if (!sheet) {
+      sheet = ss.insertSheet("Data Sekolah");
+      sheet.appendRow(["Kunci", "Nilai"]);
+      sheet.appendRow(["namaKepala", defaultData.namaKepala]);
+      sheet.appendRow(["nipKepala", defaultData.nipKepala]);
+      sheet.appendRow(["ttdKepala", ""]);
+      sheet.appendRow(["stempelSekolah", ""]);
+      sheet.appendRow(["kopSekolah", ""]);
+      return defaultData;
+    }
     
     var data = sheet.getDataRange().getValues();
-    var result = {};
+    var result = {
+      namaKepala: defaultData.namaKepala,
+      nipKepala: defaultData.nipKepala,
+      ttdKepala: "",
+      stempelSekolah: "",
+      kopSekolah: ""
+    };
     for (var i = 1; i < data.length; i++) {
       if (data[i][0]) {
-        result[data[i][0].toString()] = data[i][1] ? data[i][1].toString() : "";
+        var k = data[i][0].toString().trim();
+        var v = data[i][1] ? data[i][1].toString().trim() : "";
+        if (v !== "") {
+          result[k] = v;
+        }
       }
     }
     return result;
   } catch (error) {
     Logger.log("Error getDataSekolahFromSheet: " + error.toString());
-    return null;
+    return {
+      namaKepala: "LAILATUL FAJRIAH, S.Pd.SD.",
+      nipKepala: "197808202008012005",
+      ttdKepala: "",
+      stempelSekolah: "",
+      kopSekolah: ""
+    };
   }
 }
 

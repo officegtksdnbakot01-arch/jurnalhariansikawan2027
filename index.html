@@ -297,8 +297,8 @@
                     <div id="docTtdKepalaContainer" class="absolute left-1/2 -translate-x-1/2 z-20 flex items-center justify-center" style="bottom: 0;"></div>
                   </div>
 
-                  <p class="font-bold underline mt-1 mb-0" id="docNamaKepala">LAILATUL FAJRIAH, S.Pd.SD</p>
-                  <p id="docNipKepala" class="leading-tight">NIP. 197003051993032005</p>
+                  <p class="font-bold underline mt-1 mb-0" id="docNamaKepala">LAILATUL FAJRIAH, S.Pd.SD.</p>
+                  <p id="docNipKepala" class="leading-tight">NIP. 197808202008012005</p>
                 </div>
 
                 <!-- Kolom Pegawai -->
@@ -426,11 +426,11 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-blue-900 mb-1">Nama Kepala Sekolah</label>
-            <input type="text" id="sekolahNamaKepala" class="w-full p-2.5 border rounded-lg text-xs outline-none bg-white">
+            <input type="text" id="sekolahNamaKepala" value="LAILATUL FAJRIAH, S.Pd.SD." class="w-full p-2.5 border rounded-lg text-xs outline-none bg-white">
           </div>
           <div>
             <label class="block text-xs font-bold text-blue-900 mb-1">NIP Kepala Sekolah</label>
-            <input type="text" id="sekolahNipKepala" class="w-full p-2.5 border rounded-lg text-xs outline-none bg-white">
+            <input type="text" id="sekolahNipKepala" value="197808202008012005" class="w-full p-2.5 border rounded-lg text-xs outline-none bg-white">
           </div>
           <div>
             <label class="block text-xs font-bold text-blue-900 mb-1">Upload Ttd Kepala Sekolah</label>
@@ -1005,18 +1005,34 @@
         ];
       }
 
+      const defaultSekolah = {
+        namaKepala: "LAILATUL FAJRIAH, S.Pd.SD.",
+        nipKepala: "197808202008012005",
+        ttdKepala: "",
+        stempelSekolah: "",
+        kopSekolah: ""
+      };
+      let sData = defaultSekolah;
       const cachedSekolah = localStorage.getItem("sikawan_dataSekolah");
       if (cachedSekolah) {
         try {
-          const sData = JSON.parse(cachedSekolah);
-          document.getElementById("sekolahNamaKepala").value = sData.namaKepala || "";
-          document.getElementById("sekolahNipKepala").value = sData.nipKepala || "";
-          document.getElementById("valSekolahTtd").value = sData.ttdKepala || "";
-          document.getElementById("valSekolahStempel").value = sData.stempelSekolah || "";
-          document.getElementById("valSekolahKop").value = sData.kopSekolah || "";
-          applyDataSekolahToDoc(sData);
+          const parsed = JSON.parse(cachedSekolah);
+          sData = {
+            ...defaultSekolah,
+            ...parsed,
+            namaKepala: (parsed.namaKepala && parsed.namaKepala.trim() !== "") ? parsed.namaKepala : defaultSekolah.namaKepala,
+            nipKepala: (parsed.nipKepala && parsed.nipKepala.trim() !== "") ? parsed.nipKepala : defaultSekolah.nipKepala
+          };
         } catch(e) {}
       }
+      localStorage.setItem("sikawan_dataSekolah", JSON.stringify(sData));
+
+      document.getElementById("sekolahNamaKepala").value = sData.namaKepala;
+      document.getElementById("sekolahNipKepala").value = sData.nipKepala;
+      document.getElementById("valSekolahTtd").value = sData.ttdKepala || "";
+      document.getElementById("valSekolahStempel").value = sData.stempelSekolah || "";
+      document.getElementById("valSekolahKop").value = sData.kopSekolah || "";
+      applyDataSekolahToDoc(sData);
 
       populatePegawaiSelect();
       renderTabelPegawaiSpreadsheet();
@@ -1039,14 +1055,22 @@
             .getDataPegawaiFromSheet();
             
           google.script.run
-            .withSuccessHandler(sData => {
-              if (sData) {
-                document.getElementById("sekolahNamaKepala").value = sData.namaKepala || "";
-                document.getElementById("sekolahNipKepala").value = sData.nipKepala || "";
-                document.getElementById("valSekolahTtd").value = sData.ttdKepala || "";
-                document.getElementById("valSekolahStempel").value = sData.stempelSekolah || "";
-                document.getElementById("valSekolahKop").value = sData.kopSekolah || "";
-                applyDataSekolahToDoc(sData);
+            .withSuccessHandler(resData => {
+              if (resData) {
+                const updatedSekolah = {
+                  namaKepala: (resData.namaKepala && resData.namaKepala.trim() !== "") ? resData.namaKepala : "LAILATUL FAJRIAH, S.Pd.SD.",
+                  nipKepala: (resData.nipKepala && resData.nipKepala.trim() !== "") ? resData.nipKepala : "197808202008012005",
+                  ttdKepala: resData.ttdKepala || document.getElementById("valSekolahTtd").value || "",
+                  stempelSekolah: resData.stempelSekolah || document.getElementById("valSekolahStempel").value || "",
+                  kopSekolah: resData.kopSekolah || document.getElementById("valSekolahKop").value || ""
+                };
+                document.getElementById("sekolahNamaKepala").value = updatedSekolah.namaKepala;
+                document.getElementById("sekolahNipKepala").value = updatedSekolah.nipKepala;
+                document.getElementById("valSekolahTtd").value = updatedSekolah.ttdKepala;
+                document.getElementById("valSekolahStempel").value = updatedSekolah.stempelSekolah;
+                document.getElementById("valSekolahKop").value = updatedSekolah.kopSekolah;
+                localStorage.setItem("sikawan_dataSekolah", JSON.stringify(updatedSekolah));
+                applyDataSekolahToDoc(updatedSekolah);
               }
             })
             .withFailureHandler(err => {
