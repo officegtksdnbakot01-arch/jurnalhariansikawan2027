@@ -78,7 +78,7 @@ function getDataPegawaiFromSheet() {
       sheet.appendRow(["No", "NIP / NI PPPK", "Nama Pegawai", "Jabatan", "Pangkat / Gol", "Status", "Foto Pegawai", "TTD Pegawai"]);
       sheet.getRange(1, 2, 100, 1).setNumberFormat("@"); // Format kolom NIP sebagai teks murni
       sheet.appendRow(["1", "198105102025211008", "SAMSUDIN", "Pengadministrasi Perkantoran", "V", "PPPK", "", ""]);
-      sheet.appendRow(["3", "197808202008012005", "LAILATUL FAJRIAH, S.Pd.SD", "Kepala Sekolah", "Penata Tk. I, III/d", "PNS / ASN", "", ""]);
+      sheet.appendRow(["2", "197808202008012005", "LAILATUL FAJRIAH, S.Pd.SD", "Kepala Sekolah", "Penata Tk. I, III/d", "PNS / ASN", "", ""]);
     }
     
     var data = sheet.getDataRange().getValues();
