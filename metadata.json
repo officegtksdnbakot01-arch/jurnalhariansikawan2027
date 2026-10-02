@@ -1,0 +1,6 @@
+{
+  "name": "Jurnal Sikawan Harian SDN Babelan Kota 01",
+  "description": "Aplikasi Jurnal Sikawan Harian & Rekapitulasi dengan Ekspor PDF Lembar Kerja F4 Portrait untuk SDN Babelan Kota 01.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
