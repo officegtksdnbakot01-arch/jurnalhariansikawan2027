@@ -250,7 +250,7 @@
               </div>
 
               <!-- JUDUL DENGAN JARAK 10mm KE NAMA PEGAWAI -->
-              <div class="text-center font-bold text-sm underline" style="margin-top: 3mm; margin-bottom: 10mm; letter-spacing: 0.5px;">JURNAL KERJA HARIAN</div>
+              <div class="text-center font-bold underline" style="font-size: 14pt; margin-top: 3mm; margin-bottom: 10mm; letter-spacing: 0.5px;">JURNAL KERJA HARIAN</div>
 
               <!-- PROFIL PEGAWAI -->
               <div class="flex justify-between mb-3 text-xs">
@@ -492,7 +492,7 @@
             <option value="">Semua Status</option>
             <option value="ASN">ASN</option>
             <option value="PPPK">PPPK</option>
-            <option value="PPPK PW">PPPK PW/option>
+            <option value="PPPK PW">PPPK PW</option>
           </select>
         </div>
       </div>
@@ -538,7 +538,7 @@
           </div>
           <div>
             <h4 class="font-extrabold text-gray-900 text-sm sm:text-base leading-tight">Pilih Template Kegiatan</h4>
-            <p class="text-[11px] text-gray-500">Pilih salah satu dari 17 template kegiatan harian guru & tendik</p>
+            <p class="text-[11px] text-gray-500">Pilih salah satu dari 29 template kegiatan harian guru & tendik</p>
           </div>
         </div>
         <button onclick="closeTemplateModal()" class="w-8 h-8 rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center transition cursor-pointer">
@@ -552,15 +552,15 @@
         <input type="text" id="inputCariTemplate" oninput="filterTemplateKegiatan(this.value)" placeholder="Cari kegiatan (misal: KBM, P5, Asesmen, Modul Ajar, PMM, Remedial)..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:ring-2 focus:ring-blue-900 focus:bg-white focus:outline-none transition">
       </div>
 
-      <!-- Daftar 17 Template Kegiatan -->
+      <!-- Daftar 29 Template Kegiatan -->
       <div id="daftarTemplateContainer" class="flex flex-col gap-2 overflow-y-auto pr-1 sm:pr-2 max-h-[58vh] scrollbar-thin">
         
         <!-- 1 -->
-        <div onclick="terapkanTemplate('Kegiatan Pagi Ceria dan Gerakan Tujuh Kebiasaan Anak Indonesia Hebat,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <div onclick="pilihTemplateByIndex(0)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
             <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">1</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pagi Ceria & 7 Kebiasaan Anak Indonesia Hebat</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pagi Ceria & Gerakan 7 Kebiasaan Anak Indonesia Hebat</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Kegiatan Pagi Ceria dan Gerakan Tujuh Kebiasaan Anak Indonesia Hebat,</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
@@ -568,21 +568,213 @@
         </div>
 
         <!-- 2 -->
-        <div onclick="terapkanTemplate('Pemeriksaan kedisiplinan pakaian seragam dan kerapian siswa,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <div onclick="pilihTemplateByIndex(1)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
             <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">2</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pemeriksaan Kedisiplinan & Kerapian Siswa</div>
-              <div class="text-[11px] text-gray-600 mt-0.5">Pemeriksaan kedisiplinan pakaian seragam dan kerapian siswa,</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Gerakan Literasi Sekolah (GLS)</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan Kegiatan Gerakan Literasi Sekolah (GLS)</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
           </div>
         </div>
 
         <!-- 3 -->
-        <div onclick="terapkanTemplate('Pelaksanaan KBM tatap muka materi inti sesuai Modul Ajar,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <div onclick="pilihTemplateByIndex(2)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
             <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">3</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pembiasaan Senam Pagi Bersama</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Mengikuti kegiatan Pembiasaan Senam Pagi Bersama</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 4 -->
+        <div onclick="pilihTemplateByIndex(3)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">4</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Upacara Bendera Setiap Hari Senin Pagi</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan Upacara bendera Setiap Hari Senin pagi yang diikuti Semua Guru, Tendik dan Siswa</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 5 -->
+        <div onclick="pilihTemplateByIndex(4)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">5</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Kegiatan Jum’at Bersih Seluruh Siswa</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan Kegiatan  Jum’at Bersih semua siswa</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div onclick="pilihTemplateByIndex(5)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">6</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Kegiatan Sholat Dhuha Berjama’ah Siswa</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan Kegaiatan Sholat Dhua Berjama’ah yang di Ikuti oleh semua siswa</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 7 -->
+        <div onclick="pilihTemplateByIndex(6)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">7</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pagi Ceria, G7KIH, Pembelajaran B. Indonesia & Refleksi</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan kegiatan pagi ceria dan G7KIH, kegiatan.pembelajaran bahasa indonesia dan legiatan refleksi</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div onclick="pilihTemplateByIndex(7)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">8</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pagi Ceria, G7KAIH, B. Indonesia, PJOK & Latihan Sholawat</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan kegiatan.pagi ceria & G7KAIH , Kegiatan pembelajaran Bahasa Indonesia dan PJOK , Latiahan sholawat</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 9 -->
+        <div onclick="pilihTemplateByIndex(8)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">9</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pagi Ceria, G7KAIH & Asesmen Sumatif Tengah Semester 1</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan kegiatan pagi ceria dan G7KAIH , kegiatan Asesmen Sumatuf Tengah Semester 1 :</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 10 -->
+        <div onclick="pilihTemplateByIndex(9)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">10</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pagi Ceria, G7KAIH & Asesmen Sumatif Tengah Semester 2</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan kegiatan pagi ceria dan G7KAIH , kegiatan Asesmen Sumatuf Tengah Semester 2</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 11 -->
+        <div onclick="pilihTemplateByIndex(10)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">11</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pagi Ceria, G7KAIH & Penilaian Akhir Sumatif Semester 1</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan kegiatan pagi ceria dan G7KAIH , kegiatan Penilaian Akhir Sumatif Semester 1</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 12 -->
+        <div onclick="pilihTemplateByIndex(11)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">12</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pagi Ceria, G7KAIH & Penilaian Akhir Sumatif Semester 2</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan kegiatan pagi ceria dan G7KAIH , kegiatan Penilaian Akhir Sumatif Semester 2</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 13 -->
+        <div onclick="pilihTemplateByIndex(12)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">13</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Bimbingan Upacara / Apel Disiplin Profil Pelajar Pancasila</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Mengikuti dan membimbing peserta didik dalam upacara bendera/apel pagi guna pembiasaan disiplin dan karakter profil pelajar Pancasila.</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 14 -->
+        <div onclick="pilihTemplateByIndex(13)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">14</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">KBM Kurikulum Merdeka & Pendampingan Siswa</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan kegiatan belajar mengajar sesuai modul ajar Kurikulum Merdeka, penjelasan materi, dan pendampingan peserta didik.</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 15 -->
+        <div onclick="pilihTemplateByIndex(14)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">15</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Penyusunan Perangkat Ajar, LKPD & Bahan Ajar Tematik</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Menyusun dan mengembangkan perangkat ajar, lembar kerja peserta didik (LKPD), serta bahan ajar tematik.</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 16 -->
+        <div onclick="pilihTemplateByIndex(15)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">16</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Sosialisasi In House Training (IHT) Guru & Tendik</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Sosialisasi tentang In House Training yang diikuti oleh Guru dan Tendik.</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 17 -->
+        <div onclick="pilihTemplateByIndex(16)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">17</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pengelolaan Surat Dinas, Arsip & Layanan Administrasi</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Melaksanakan pengelolaan surat-menyurat dinas, pengarsipan berkas sekolah, dan pelayanan administrasi kependidikan.</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 18 -->
+        <div onclick="pilihTemplateByIndex(17)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">18</span>
+            <div class="flex-1">
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pemeriksaan Kedisiplinan Pakaian Seragam & Kerapian Siswa</div>
+              <div class="text-[11px] text-gray-600 mt-0.5">Pemeriksaan kedisiplinan pakaian seragam dan kerapian siswa,</div>
+            </div>
+            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
+          </div>
+        </div>
+
+        <!-- 19 -->
+        <div onclick="pilihTemplateByIndex(18)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+          <div class="flex items-start gap-2.5">
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">19</span>
             <div class="flex-1">
               <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pelaksanaan KBM Tatap Muka Sesuai Modul Ajar</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pelaksanaan KBM tatap muka materi inti sesuai Modul Ajar,</div>
@@ -591,34 +783,34 @@
           </div>
         </div>
 
-        <!-- 4 -->
-        <div onclick="terapkanTemplate('Pembelajaran interaktif, diskusi kelompok terarah, dan presentasi siswa,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 20 -->
+        <div onclick="pilihTemplateByIndex(19)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">4</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">20</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pembelajaran Interaktif & Diskusi Kelompok</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pembelajaran Interaktif, Diskusi Kelompok & Presentasi</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pembelajaran interaktif, diskusi kelompok terarah, dan presentasi siswa,</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
           </div>
         </div>
 
-        <!-- 5 -->
-        <div onclick="terapkanTemplate('Pelaksanaan kegiatan Projek Penguatan Profil Pelajar Pancasila (P5),')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 21 -->
+        <div onclick="pilihTemplateByIndex(20)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">5</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">21</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Kegiatan Projek Penguatan Profil Pelajar Pancasila (P5)</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pelaksanaan Projek Profil Pelajar Pancasila (P5)</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pelaksanaan kegiatan Projek Penguatan Profil Pelajar Pancasila (P5),</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
           </div>
         </div>
 
-        <!-- 6 -->
-        <div onclick="terapkanTemplate('Pendampingan aktivitas belajar siswa dan tanya jawab pemahaman materi,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 22 -->
+        <div onclick="pilihTemplateByIndex(21)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">6</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">22</span>
             <div class="flex-1">
               <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pendampingan Belajar Siswa & Tanya Jawab Materi</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pendampingan aktivitas belajar siswa dan tanya jawab pemahaman materi,</div>
@@ -627,10 +819,10 @@
           </div>
         </div>
 
-        <!-- 7 -->
-        <div onclick="terapkanTemplate('Bimbingan remedial bagi siswa yang belum mencapai tujuan pembelajaran,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 23 -->
+        <div onclick="pilihTemplateByIndex(22)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">7</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">23</span>
             <div class="flex-1">
               <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Bimbingan Remedial Pembelajaran Siswa</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Bimbingan remedial bagi siswa yang belum mencapai tujuan pembelajaran,</div>
@@ -639,34 +831,34 @@
           </div>
         </div>
 
-        <!-- 8 -->
-        <div onclick="terapkanTemplate('Pendampingan khusus literasi dan numerasi terbimbing di pojok baca,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 24 -->
+        <div onclick="pilihTemplateByIndex(23)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">8</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">24</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pendampingan Literasi & Numerasi di Pojok Baca</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pendampingan Khusus Literasi & Numerasi di Pojok Baca</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pendampingan khusus literasi dan numerasi terbimbing di pojok baca,</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
           </div>
         </div>
 
-        <!-- 9 -->
-        <div onclick="terapkanTemplate('Pelaksanaan asesmen formatif harian dan untuk pemahaman materi,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 25 -->
+        <div onclick="pilihTemplateByIndex(24)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">9</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">25</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pelaksanaan Asesmen Formatif Harian</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pelaksanaan Asesmen Formatif Harian Materi</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pelaksanaan asesmen formatif harian dan untuk pemahaman materi,</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
           </div>
         </div>
 
-        <!-- 10 -->
-        <div onclick="terapkanTemplate('Pelaksanaan asesmen sumatif materi / ulangan harian,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 26 -->
+        <div onclick="pilihTemplateByIndex(25)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">10</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">26</span>
             <div class="flex-1">
               <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pelaksanaan Asesmen Sumatif / Ulangan Harian</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pelaksanaan asesmen sumatif materi / ulangan harian,</div>
@@ -675,85 +867,37 @@
           </div>
         </div>
 
-        <!-- 11 -->
-        <div onclick="terapkanTemplate('Pemeriksaan kelengkapan portofolio hasil karya dan nilai siswa,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 27 -->
+        <div onclick="pilihTemplateByIndex(26)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">11</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">27</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pemeriksaan Portofolio Karya & Nilai Siswa</div>
-              <div class="text-[11px] text-gray-600 mt-0.5">Pemeriksaan kelengkapan portofolio hasil karya dan nilai siswa,</div>
-            </div>
-            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
-          </div>
-        </div>
-
-        <!-- 12 -->
-        <div onclick="terapkanTemplate('Penyusunan dan penyempurnaan Modul Ajar Kurikulum Merdeka,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
-          <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">12</span>
-            <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Penyusunan Modul Ajar Kurikulum Merdeka</div>
-              <div class="text-[11px] text-gray-600 mt-0.5">Penyusunan dan penyempurnaan Modul Ajar Kurikulum Merdeka,</div>
-            </div>
-            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
-          </div>
-        </div>
-
-        <!-- 13 -->
-        <div onclick="terapkanTemplate('Pengembangan media pembelajaran interaktif dan bahan tayang digital, Penyusunan instrumen kisi-kisi soal dan rubrik penilaian asesmen,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
-          <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">13</span>
-            <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pengembangan Media Digital & Kisi-Kisi Asesmen</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Media Pembelajaran Digital & Kisi-Kisi Rubrik Asesmen</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pengembangan media pembelajaran interaktif dan bahan tayang digital, Penyusunan instrumen kisi-kisi soal dan rubrik penilaian asesmen,</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
           </div>
         </div>
 
-        <!-- 14 -->
-        <div onclick="terapkanTemplate('Pengisian administrasi presensi siswa dan rekapitulasi ketidakhadiran,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 28 -->
+        <div onclick="pilihTemplateByIndex(27)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">14</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">28</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Administrasi Presensi & Rekap Ketidakhadiran</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Administrasi Presensi Siswa & Rekap Ketidakhadiran</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Pengisian administrasi presensi siswa dan rekapitulasi ketidakhadiran,</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
           </div>
         </div>
 
-        <!-- 15 -->
-        <div onclick="terapkanTemplate('Kegiatan Komunitas Belajar (Kombel) intra-sekolah / KKG guru,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
+        <!-- 29 -->
+        <div onclick="pilihTemplateByIndex(28)" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
           <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">15</span>
+            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">29</span>
             <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Komunitas Belajar (Kombel) Intra-Sekolah / KKG Guru</div>
+              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Kegiatan Komunitas Belajar (Kombel) / KKG Guru</div>
               <div class="text-[11px] text-gray-600 mt-0.5">Kegiatan Komunitas Belajar (Kombel) intra-sekolah / KKG guru,</div>
-            </div>
-            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
-          </div>
-        </div>
-
-        <!-- 16 -->
-        <div onclick="terapkanTemplate('Pelatihan mandiri peningkatan kompetensi pada Platform Merdeka Mengajar (PMM), Komunikasi dan koordinasi perkembangan belajar siswa dengan orang tua / wali,')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
-          <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">16</span>
-            <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Pelatihan Mandiri PMM & Koordinasi Orang Tua Siswa</div>
-              <div class="text-[11px] text-gray-600 mt-0.5">Pelatihan mandiri peningkatan kompetensi pada Platform Merdeka Mengajar (PMM), Komunikasi dan koordinasi perkembangan belajar siswa dengan orang tua / wali,</div>
-            </div>
-            <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
-          </div>
-        </div>
-
-        <!-- 17 -->
-        <div onclick="terapkanTemplate('Sosialisasi tentang In House Training yang diikuti oleh Guru dan Tendik.')" class="template-item p-3 border border-gray-200 rounded-xl cursor-pointer hover:border-blue-600 hover:bg-blue-50/70 hover:shadow-xs transition group">
-          <div class="flex items-start gap-2.5">
-            <span class="w-6 h-6 rounded-md bg-blue-100 text-blue-900 font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-blue-900 group-hover:text-white transition">17</span>
-            <div class="flex-1">
-              <div class="font-bold text-xs text-gray-900 group-hover:text-blue-900 leading-snug">Sosialisasi In House Training (IHT) Guru & Tendik</div>
-              <div class="text-[11px] text-gray-600 mt-0.5">Sosialisasi tentang In House Training yang diikuti oleh Guru dan Tendik.</div>
             </div>
             <i class="fa-solid fa-arrow-right text-gray-300 group-hover:text-blue-900 group-hover:translate-x-1 transition text-xs flex-shrink-0 mt-1"></i>
           </div>
@@ -763,7 +907,7 @@
 
       <!-- Footer Modal -->
       <div class="border-t border-gray-100 pt-3 mt-3 flex justify-between items-center text-xs text-gray-500 flex-shrink-0">
-        <span id="labelTotalTemplate" class="font-medium text-gray-500">17 Template Kegiatan Tersedia</span>
+        <span id="labelTotalTemplate" class="font-medium text-gray-500">29 Template Kegiatan Tersedia</span>
         <button onclick="closeTemplateModal()" class="px-4 py-1.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition cursor-pointer">
           Tutup
         </button>
@@ -990,6 +1134,18 @@
 
     function loadPegawaiFromSpreadsheet() {
       // 1. Muat data lokal / default TERLEBIH DAHULU agar dropdown dan semua tombol langsung aktif tanpa menunggu
+      const defaultPegawai = [
+        { no: "1", nip: "198104092008012003", name: "ROCHIZA EFFENDI, S.Pd", jabatan: "Guru Kelas I C", pangkat: "Penata, III/c", status: "ASN", poto: "", ttd: "" },
+        { no: "2", nip: "197801312008012006", name: "TRI ASTUTY, S.Pd.,M.M", jabatan: "Guru Kelas I A", pangkat: "Penata Tk. I, III/d", status: "ASN", poto: "", ttd: "" },
+        { no: "3", nip: "197604122007012012", name: "YAYAH SUTINAH, S.Pd", jabatan: "Guru Kelas I B", pangkat: "Penata, III/c", status: "ASN", poto: "", ttd: "" },
+        { no: "4", nip: "198506242025211006", name: "MAHFUDZ, S.Pd.I", jabatan: "Guru PAI", pangkat: "IX", status: "PPPK", poto: "", ttd: "" },
+        { no: "5", nip: "198004032025211031", name: "EDI SAPUTRA, S.Sos.I", jabatan: "Guru PJOK", pangkat: "IX", status: "PPPK", poto: "", ttd: "" },
+        { no: "6", nip: "197212172014082001", name: "NGATIMAH, S.Pd", jabatan: "Guru Kelas VI A", pangkat: "Penata Muda Tk. I, III/b", status: "ASN", poto: "", ttd: "" },
+        { no: "7", nip: "198802222025212005", name: "KIKI FUJI LESTARI, S.Pd", jabatan: "Guru Kelas", pangkat: "IX", status: "PPPK", poto: "", ttd: "" },
+        { no: "8", nip: "199106182025212013", name: "MARLINAH, S.Pd", jabatan: "Guru Kelas", pangkat: "IX", status: "PPPK", poto: "", ttd: "" },
+        { no: "9", nip: "198808022024212007", name: "NISA UTAMININGRUM, S.Pd", jabatan: "Guru Kelas", pangkat: "IX", status: "PPPK", poto: "", ttd: "" }
+      ];
+
       const cachedPegawai = localStorage.getItem("sikawan_pegawaiData");
       if (cachedPegawai) {
         try {
@@ -998,12 +1154,32 @@
           pegawaiData = [];
         }
       }
-      if (!pegawaiData || pegawaiData.length === 0) {
-        pegawaiData = [
-          { no: "1", nip: "198105102025211008", name: "SAMSUDIN", jabatan: "Pengadministrasi Perkantoran", pangkat: "V", status: "PPPK", poto: "", ttd: "" },
-          { no: "2", nip: "198104092008012003", name: "ROCHIZA EFFENDI, S.Pd", jabatan: "Guru Kelas I C", pangkat: "Penata, III/c", status: "ASN", poto: "", ttd: "" }
-        ];
+      if (!pegawaiData || !Array.isArray(pegawaiData) || pegawaiData.length === 0) {
+        pegawaiData = defaultPegawai;
+      } else {
+        // Pastikan LAILATUL FAJRIAH & SAMSUDIN dihapus dari daftar pegawai
+        pegawaiData = pegawaiData.filter(p => {
+          const nip = (p.nip || "").trim();
+          const nm = (p.name || "").toUpperCase();
+          return nip !== "197808202008012005" && !nm.includes("LAILATUL FAJRIAH") &&
+                 nip !== "198105102025211008" && !nm.includes("SAMSUDIN");
+        });
+
+        // Pastikan seluruh pegawai baku SDN Babelan Kota 01 selalu ada di dropdown pegawai walaupun pengguna memiliki cache lokal lama
+        defaultPegawai.forEach(dp => {
+          const exists = pegawaiData.some(p => 
+            (p.nip && p.nip.trim() === dp.nip.trim()) || 
+            (p.name && p.name.toUpperCase().indexOf(dp.name.toUpperCase()) !== -1)
+          );
+          if (!exists) {
+            pegawaiData.push({
+              ...dp,
+              no: (pegawaiData.length + 1).toString()
+            });
+          }
+        });
       }
+      localStorage.setItem("sikawan_pegawaiData", JSON.stringify(pegawaiData));
 
       const defaultSekolah = {
         namaKepala: "LAILATUL FAJRIAH, S.Pd.SD.",
@@ -1043,7 +1219,27 @@
           google.script.run
             .withSuccessHandler(data => {
               if (data && Array.isArray(data) && data.length > 0) {
-                pegawaiData = data;
+                // Saring keluar LAILATUL FAJRIAH & SAMSUDIN dari Data Pegawai
+                pegawaiData = data.filter(p => {
+                  const nip = (p.nip || "").trim();
+                  const nm = (p.name || "").toUpperCase();
+                  return nip !== "197808202008012005" && !nm.includes("LAILATUL FAJRIAH") &&
+                         nip !== "198105102025211008" && !nm.includes("SAMSUDIN");
+                });
+
+                // Pastikan seluruh pegawai baku tetap ada di daftar hasil fetch dari spreadsheet
+                defaultPegawai.forEach(dp => {
+                  const exists = pegawaiData.some(p => 
+                    (p.nip && p.nip.trim() === dp.nip.trim()) || 
+                    (p.name && p.name.toUpperCase().indexOf(dp.name.toUpperCase()) !== -1)
+                  );
+                  if (!exists) {
+                    pegawaiData.push({
+                      ...dp,
+                      no: (pegawaiData.length + 1).toString()
+                    });
+                  }
+                });
                 localStorage.setItem("sikawan_pegawaiData", JSON.stringify(pegawaiData));
                 populatePegawaiSelect();
                 renderTabelPegawaiSpreadsheet();
@@ -1288,6 +1484,131 @@
       setTimeout(autoFitDocument, 50);
     }
 
+    const TEMPLATE_KEGIATAN_LIST = [
+      {
+        title: "Pagi Ceria & Gerakan 7 Kebiasaan Anak Indonesia Hebat",
+        text: "Kegiatan Pagi Ceria dan Gerakan Tujuh Kebiasaan Anak Indonesia Hebat,"
+      },
+      {
+        title: "Gerakan Literasi Sekolah (GLS)",
+        text: "Melaksanakan Kegiatan Gerakan Literasi Sekolah (GLS)"
+      },
+      {
+        title: "Pembiasaan Senam Pagi Bersama",
+        text: "Mengikuti kegiatan Pembiasaan Senam Pagi Bersama"
+      },
+      {
+        title: "Upacara Bendera Setiap Hari Senin Pagi",
+        text: "Melaksanakan Upacara bendera Setiap Hari Senin pagi yang diikuti Semua Guru, Tendik dan Siswa"
+      },
+      {
+        title: "Kegiatan Jum’at Bersih Seluruh Siswa",
+        text: "Melaksanakan Kegiatan  Jum’at Bersih semua siswa"
+      },
+      {
+        title: "Kegiatan Sholat Dhuha Berjama’ah Siswa",
+        text: "Melaksanakan Kegaiatan Sholat Dhua Berjama’ah yang di Ikuti oleh semua siswa"
+      },
+      {
+        title: "Pagi Ceria, G7KIH, Pembelajaran B. Indonesia & Refleksi",
+        text: "Melaksanakan kegiatan pagi ceria dan G7KIH, kegiatan.pembelajaran bahasa indonesia dan legiatan refleksi"
+      },
+      {
+        title: "Pagi Ceria, G7KAIH, B. Indonesia, PJOK & Latihan Sholawat",
+        text: "Melaksanakan kegiatan.pagi ceria & G7KAIH , Kegiatan pembelajaran Bahasa Indonesia dan PJOK , Latiahan sholawat"
+      },
+      {
+        title: "Pagi Ceria, G7KAIH & Asesmen Sumatif Tengah Semester 1",
+        text: "Melaksanakan kegiatan pagi ceria dan G7KAIH , kegiatan Asesmen Sumatuf Tengah Semester 1 :"
+      },
+      {
+        title: "Pagi Ceria, G7KAIH & Asesmen Sumatif Tengah Semester 2",
+        text: "Melaksanakan kegiatan pagi ceria dan G7KAIH , kegiatan Asesmen Sumatuf Tengah Semester 2"
+      },
+      {
+        title: "Pagi Ceria, G7KAIH & Penilaian Akhir Sumatif Semester 1",
+        text: "Melaksanakan kegiatan pagi ceria dan G7KAIH , kegiatan Penilaian Akhir Sumatif Semester 1"
+      },
+      {
+        title: "Pagi Ceria, G7KAIH & Penilaian Akhir Sumatif Semester 2",
+        text: "Melaksanakan kegiatan pagi ceria dan G7KAIH , kegiatan Penilaian Akhir Sumatif Semester 2"
+      },
+      {
+        title: "Bimbingan Upacara / Apel Disiplin Profil Pelajar Pancasila",
+        text: "Mengikuti dan membimbing peserta didik dalam upacara bendera/apel pagi guna pembiasaan disiplin dan karakter profil pelajar Pancasila."
+      },
+      {
+        title: "KBM Kurikulum Merdeka & Pendampingan Siswa",
+        text: "Melaksanakan kegiatan belajar mengajar sesuai modul ajar Kurikulum Merdeka, penjelasan materi, dan pendampingan peserta didik."
+      },
+      {
+        title: "Penyusunan Perangkat Ajar, LKPD & Bahan Ajar Tematik",
+        text: "Menyusun dan mengembangkan perangkat ajar, lembar kerja peserta didik (LKPD), serta bahan ajar tematik."
+      },
+      {
+        title: "Sosialisasi In House Training (IHT) Guru & Tendik",
+        text: "Sosialisasi tentang In House Training yang diikuti oleh Guru dan Tendik."
+      },
+      {
+        title: "Pengelolaan Surat Dinas, Arsip & Layanan Administrasi",
+        text: "Melaksanakan pengelolaan surat-menyurat dinas, pengarsipan berkas sekolah, dan pelayanan administrasi kependidikan."
+      },
+      {
+        title: "Pemeriksaan Kedisiplinan Pakaian Seragam & Kerapian Siswa",
+        text: "Pemeriksaan kedisiplinan pakaian seragam dan kerapian siswa,"
+      },
+      {
+        title: "Pelaksanaan KBM Tatap Muka Sesuai Modul Ajar",
+        text: "Pelaksanaan KBM tatap muka materi inti sesuai Modul Ajar,"
+      },
+      {
+        title: "Pembelajaran Interaktif, Diskusi Kelompok & Presentasi",
+        text: "Pembelajaran interaktif, diskusi kelompok terarah, dan presentasi siswa,"
+      },
+      {
+        title: "Pelaksanaan Projek Profil Pelajar Pancasila (P5)",
+        text: "Pelaksanaan kegiatan Projek Penguatan Profil Pelajar Pancasila (P5),"
+      },
+      {
+        title: "Pendampingan Belajar Siswa & Tanya Jawab Materi",
+        text: "Pendampingan aktivitas belajar siswa dan tanya jawab pemahaman materi,"
+      },
+      {
+        title: "Bimbingan Remedial Pembelajaran Siswa",
+        text: "Bimbingan remedial bagi siswa yang belum mencapai tujuan pembelajaran,"
+      },
+      {
+        title: "Pendampingan Khusus Literasi & Numerasi di Pojok Baca",
+        text: "Pendampingan khusus literasi dan numerasi terbimbing di pojok baca,"
+      },
+      {
+        title: "Pelaksanaan Asesmen Formatif Harian Pemahaman Materi",
+        text: "Pelaksanaan asesmen formatif harian dan untuk pemahaman materi,"
+      },
+      {
+        title: "Pelaksanaan Asesmen Sumatif Materi / Ulangan Harian",
+        text: "Pelaksanaan asesmen sumatif materi / ulangan harian,"
+      },
+      {
+        title: "Media Pembelajaran Digital & Kisi-Kisi Rubrik Asesmen",
+        text: "Pengembangan media pembelajaran interaktif dan bahan tayang digital, Penyusunan instrumen kisi-kisi soal dan rubrik penilaian asesmen,"
+      },
+      {
+        title: "Pengisian Administrasi Presensi Siswa & Rekap Ketidakhadiran",
+        text: "Pengisian administrasi presensi siswa dan rekapitulasi ketidakhadiran,"
+      },
+      {
+        title: "Kegiatan Komunitas Belajar (Kombel) / KKG Guru",
+        text: "Kegiatan Komunitas Belajar (Kombel) intra-sekolah / KKG guru,"
+      }
+    ];
+
+    function pilihTemplateByIndex(idx) {
+      if (idx >= 0 && idx < TEMPLATE_KEGIATAN_LIST.length) {
+        terapkanTemplate(TEMPLATE_KEGIATAN_LIST[idx].text);
+      }
+    }
+
     function bukaTemplate(btn) {
       activeBoxForTemplate = btn.closest('.bg-white');
       const inputCari = document.getElementById('inputCariTemplate');
@@ -1314,7 +1635,7 @@
       });
       const lbl = document.getElementById("labelTotalTemplate");
       if (lbl) {
-        lbl.innerText = keyword ? `${visibleCount} template ditemukan` : `17 Template Kegiatan Tersedia`;
+        lbl.innerText = keyword ? `${visibleCount} template ditemukan` : `29 Template Kegiatan Tersedia`;
       }
     }
 

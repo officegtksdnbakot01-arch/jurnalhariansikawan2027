@@ -77,22 +77,90 @@ function getDataPegawaiFromSheet() {
       sheet = ss.insertSheet("Data Pegawai");
       sheet.appendRow(["No", "NIP / NI PPPK", "Nama Pegawai", "Jabatan", "Pangkat / Gol", "Status", "Foto Pegawai", "TTD Pegawai"]);
       sheet.getRange(1, 2, 100, 1).setNumberFormat("@"); // Format kolom NIP sebagai teks murni
-      sheet.appendRow(["1", "198105102025211008", "SAMSUDIN", "Pengadministrasi Perkantoran", "V", "PPPK", "", ""]);
-      sheet.appendRow(["2", "198104092008012003", "ROCHIZA EFFENDI, S.Pd", "Guru Kelas I C", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["1", "198104092008012003", "ROCHIZA EFFENDI, S.Pd", "Guru Kelas I C", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["2", "197801312008012006", "TRI ASTUTY, S.Pd.,M.M", "Guru Kelas I A", "Penata Tk. I, III/d", "ASN", "", ""]);
+      sheet.appendRow(["3", "197604122007012012", "YAYAH SUTINAH, S.Pd", "Guru Kelas I B", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["4", "198506242025211006", "MAHFUDZ, S.Pd.I", "Guru PAI", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["5", "198004032025211031", "EDI SAPUTRA, S.Sos.I", "Guru PJOK", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["6", "197212172014082001", "NGATIMAH, S.Pd", "Guru Kelas VI A", "Penata Muda Tk. I, III/b", "ASN", "", ""]);
+      sheet.appendRow(["7", "198802222025212005", "KIKI FUJI LESTARI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["8", "199106182025212013", "MARLINAH, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["9", "198808022024212007", "NISA UTAMININGRUM, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
     }
     
     var data = sheet.getDataRange().getValues();
     if (data.length <= 1) return [];
-    
+
+    // Hapus LAILATUL FAJRIAH & SAMSUDIN jika sebelumnya pernah masuk ke sheet Data Pegawai
+    for (var r = data.length - 1; r >= 1; r--) {
+      var rNip = data[r][1] ? data[r][1].toString().trim() : "";
+      var rNama = data[r][2] ? data[r][2].toString().trim().toUpperCase() : "";
+      if (rNip === "197808202008012005" || rNama.indexOf("LAILATUL FAJRIAH") !== -1 ||
+          rNip === "198105102025211008" || rNama.indexOf("SAMSUDIN") !== -1) {
+        sheet.deleteRow(r + 1);
+        data = sheet.getDataRange().getValues();
+      }
+    }
+
+    // Pastikan seluruh pegawai baku SDN Babelan Kota 01 selalu tersedia di sheet
+    var defaultPegawaiList = [
+      ["198104092008012003", "ROCHIZA EFFENDI, S.Pd", "Guru Kelas I C", "Penata, III/c", "ASN"],
+      ["197801312008012006", "TRI ASTUTY, S.Pd.,M.M", "Guru Kelas I A", "Penata Tk. I, III/d", "ASN"],
+      ["197604122007012012", "YAYAH SUTINAH, S.Pd", "Guru Kelas I B", "Penata, III/c", "ASN"],
+      ["198506242025211006", "MAHFUDZ, S.Pd.I", "Guru PAI", "IX", "PPPK"],
+      ["198004032025211031", "EDI SAPUTRA, S.Sos.I", "Guru PJOK", "IX", "PPPK"],
+      ["197212172014082001", "NGATIMAH, S.Pd", "Guru Kelas VI A", "Penata Muda Tk. I, III/b", "ASN"],
+      ["198802222025212005", "KIKI FUJI LESTARI, S.Pd", "Guru Kelas", "IX", "PPPK"],
+      ["199106182025212013", "MARLINAH, S.Pd", "Guru Kelas", "IX", "PPPK"],
+      ["198808022024212007", "NISA UTAMININGRUM, S.Pd", "Guru Kelas", "IX", "PPPK"]
+    ];
+
+    var needReload = false;
+    for (var dIdx = 0; dIdx < defaultPegawaiList.length; dIdx++) {
+      var def = defaultPegawaiList[dIdx];
+      var exists = false;
+      for (var k = 1; k < data.length; k++) {
+        var n = data[k][1] ? data[k][1].toString().trim() : "";
+        var nm = data[k][2] ? data[k][2].toString().trim() : "";
+        if (n === def[0] || (nm !== "" && nm.toUpperCase().indexOf(def[1].toUpperCase()) !== -1)) {
+          exists = true;
+          break;
+        }
+      }
+      if (!exists) {
+        var nextNo = sheet.getLastRow();
+        sheet.appendRow([
+          nextNo.toString(),
+          def[0],
+          def[1],
+          def[2],
+          def[3],
+          def[4],
+          "",
+          ""
+        ]);
+        needReload = true;
+      }
+    }
+    if (needReload) {
+      data = sheet.getDataRange().getValues();
+    }
+
     var pegawaiList = [];
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
       var nip = row[1] ? row[1].toString().trim() : "";
       var nama = row[2] ? row[2].toString().trim() : "";
       
+      // Lewatkan jika LAILATUL FAJRIAH (khusus Data Sekolah) atau SAMSUDIN
+      if (nip === "197808202008012005" || nama.toUpperCase().indexOf("LAILATUL FAJRIAH") !== -1 ||
+          nip === "198105102025211008" || nama.toUpperCase().indexOf("SAMSUDIN") !== -1) {
+        continue;
+      }
+
       if (nama !== "" || nip !== "") {
         pegawaiList.push({
-          no: row[0] ? row[0].toString() : (pegawaiList.length + 1).toString(),
+          no: (pegawaiList.length + 1).toString(),
           nip: nip,
           name: nama,
           jabatan: row[3] ? row[3].toString().trim() : "-",
