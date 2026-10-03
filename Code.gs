@@ -86,6 +86,24 @@ function getDataPegawaiFromSheet() {
       sheet.appendRow(["7", "198802222025212005", "KIKI FUJI LESTARI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
       sheet.appendRow(["8", "199106182025212013", "MARLINAH, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
       sheet.appendRow(["9", "198808022024212007", "NISA UTAMININGRUM, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["10", "197606122008012003", "Hj. AISYAH, S.Ag.,M.M", "Guru Kelas", "Penata Tk. I, III/d", "ASN", "", ""]);
+      sheet.appendRow(["11", "199503092025212087", "LATIPAH, S.Pd", "Guru Kelas", "IX", "PPPK PW", "", ""]);
+      sheet.appendRow(["12", "199301222025212005", "ERYASANI RAHMAWATI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["13", "198111152008012004", "SURYATUN, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["14", "199201072025212010", "PUTRI ALFIANI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["15", "199404172025212015", "WAHYUNING HARDIYANTI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["16", "199411162020122006", "DOLA SARLITA, S.Pd", "Guru Kelas", "Penata Muda, III/a", "ASN", "", ""]);
+      sheet.appendRow(["17", "198411012008012006", "SOPIATI, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["18", "197612132008011003", "DODY ARDIANSYAH, S.Pd", "Guru Kelas", "Penata Muda, III/a", "ASN", "", ""]);
+      sheet.appendRow(["19", "197808182008011004", "H. RAHMAT HIDAYATTULLOH, S.Pd", "Guru Kelas", "Penata Tk. I, III/d", "ASN", "", ""]);
+      sheet.appendRow(["20", "198607262009022001", "ESIN RIAWATI, S.Pd", "Guru Kelas", "Penata Muda Tk. I, III/b", "ASN", "", ""]);
+      sheet.appendRow(["21", "198911062025211012", "DIDI MULYADI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["22", "199509072024211007", "RAFLY BAHRI, S.Pd", "Guru PJOK", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["23", "198911102025211006", "ABD. QODIR, S.Pd.I", "Guru PAI", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["24", "198801282025211015", "MUHAMMAD RIDUAN, S.Pd.I", "Guru PAI", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["25", "197911042025212022", "NURYANIH, S.Pd", "Guru Kelas / Guru PAI", "IX", "PPPK PW", "", ""]);
+      sheet.appendRow(["26", "198107252025212007", "SUMARTINI, S.Ag", "Guru PAB", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["27", "197507292008012008", "YULI HERLIYANTI, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
     }
     
     var data = sheet.getDataRange().getValues();
@@ -112,7 +130,25 @@ function getDataPegawaiFromSheet() {
       ["197212172014082001", "NGATIMAH, S.Pd", "Guru Kelas VI A", "Penata Muda Tk. I, III/b", "ASN"],
       ["198802222025212005", "KIKI FUJI LESTARI, S.Pd", "Guru Kelas", "IX", "PPPK"],
       ["199106182025212013", "MARLINAH, S.Pd", "Guru Kelas", "IX", "PPPK"],
-      ["198808022024212007", "NISA UTAMININGRUM, S.Pd", "Guru Kelas", "IX", "PPPK"]
+      ["198808022024212007", "NISA UTAMININGRUM, S.Pd", "Guru Kelas", "IX", "PPPK"],
+      ["197606122008012003", "Hj. AISYAH, S.Ag.,M.M", "Guru Kelas", "Penata Tk. I, III/d", "ASN"],
+      ["199503092025212087", "LATIPAH, S.Pd", "Guru Kelas", "IX", "PPPK PW"],
+      ["199301222025212005", "ERYASANI RAHMAWATI, S.Pd", "Guru Kelas", "IX", "PPPK"],
+      ["198111152008012004", "SURYATUN, S.Pd", "Guru Kelas", "Penata, III/c", "ASN"],
+      ["199201072025212010", "PUTRI ALFIANI, S.Pd", "Guru Kelas", "IX", "PPPK"],
+      ["199404172025212015", "WAHYUNING HARDIYANTI, S.Pd", "Guru Kelas", "IX", "PPPK"],
+      ["199411162020122006", "DOLA SARLITA, S.Pd", "Guru Kelas", "Penata Muda, III/a", "ASN"],
+      ["198411012008012006", "SOPIATI, S.Pd", "Guru Kelas", "Penata, III/c", "ASN"],
+      ["197612132008011003", "DODY ARDIANSYAH, S.Pd", "Guru Kelas", "Penata Muda, III/a", "ASN"],
+      ["197808182008011004", "H. RAHMAT HIDAYATTULLOH, S.Pd", "Guru Kelas", "Penata Tk. I, III/d", "ASN"],
+      ["198607262009022001", "ESIN RIAWATI, S.Pd", "Guru Kelas", "Penata Muda Tk. I, III/b", "ASN"],
+      ["198911062025211012", "DIDI MULYADI, S.Pd", "Guru Kelas", "IX", "PPPK"],
+      ["199509072024211007", "RAFLY BAHRI, S.Pd", "Guru PJOK", "IX", "PPPK"],
+      ["198911102025211006", "ABD. QODIR, S.Pd.I", "Guru PAI", "IX", "PPPK"],
+      ["198801282025211015", "MUHAMMAD RIDUAN, S.Pd.I", "Guru PAI", "IX", "PPPK"],
+      ["197911042025212022", "NURYANIH, S.Pd", "Guru Kelas / Guru PAI", "IX", "PPPK PW"],
+      ["198107252025212007", "SUMARTINI, S.Ag", "Guru PAB", "IX", "PPPK"],
+      ["197507292008012008", "YULI HERLIYANTI, S.Pd", "Guru Kelas", "Penata, III/c", "ASN"]
     ];
 
     var needReload = false;
