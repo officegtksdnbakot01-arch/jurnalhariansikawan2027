@@ -348,7 +348,7 @@
           </div>
           <div>
             <label class="block text-xs font-bold text-blue-900 mb-1">Jabatan</label>
-            <input type="text" id="newJabatan" class="w-full p-2 border border-blue-300 rounded-lg text-xs bg-white outline-none" value="Guru Kelas / Pendidik">
+            <input type="text" id="newJabatan" class="w-full p-2 border border-blue-300 rounded-lg text-xs bg-white outline-none" placeholder="Contoh: Guru Kelas I A / Guru Mapel">
           </div>
           <div>
             <label class="block text-xs font-bold text-blue-900 mb-1">Pangkat / Golongan</label>
@@ -465,10 +465,13 @@
               <i class="fa-regular fa-calendar-days"></i>
             </div>
             <h3 class="text-xl font-bold text-gray-900">Riwayat Jurnal Harian</h3>
-            <span id="badgeTotalRiwayat" class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-0.5 rounded-full">1 Entri</span>
+            <span id="badgeTotalRiwayat" class="bg-blue-100 text-blue-800 text-xs font-semibold px-3 py-0.5 rounded-full">0 Entri</span>
           </div>
         </div>
         <div class="flex items-center gap-2.5 flex-wrap">
+          <button onclick="kosongkanSemuaRiwayat()" class="bg-red-50 hover:bg-red-100 active:scale-95 text-red-600 border border-red-200 px-3 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition cursor-pointer whitespace-nowrap">
+            <i class="fa-solid fa-trash-can text-sm"></i> Kosongkan Riwayat
+          </button>
           <button onclick="unduhExcelRiwayatHarian()" class="bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white px-3.5 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 shadow-sm transition cursor-pointer whitespace-nowrap">
             <i class="fa-solid fa-file-excel text-sm text-emerald-200"></i> Unduh Riwayat Harian (.xlsx)
           </button>
@@ -1746,7 +1749,7 @@
         no: editIdx >= 0 && pegawaiData[editIdx] ? pegawaiData[editIdx].no : String(pegawaiData.length + 1),
         nip: nip,
         name: name,
-        jabatan: document.getElementById("newJabatan").value.trim() || "Guru Kelas / Pendidik",
+        jabatan: document.getElementById("newJabatan").value.trim() || "-",
         pangkat: document.getElementById("newPangkat").value.trim() || "-",
         status: document.getElementById("newStatus").value,
         poto: document.getElementById("valFotoNew").value || (editIdx >= 0 && pegawaiData[editIdx] ? pegawaiData[editIdx].poto || "" : ""),
@@ -1794,7 +1797,7 @@
       document.getElementById("editPegawaiIndex").value = idx;
       document.getElementById("newNip").value = p.nip || "";
       document.getElementById("newNama").value = p.name || "";
-      document.getElementById("newJabatan").value = p.jabatan || "Guru Kelas / Pendidik";
+      document.getElementById("newJabatan").value = p.jabatan || "";
       document.getElementById("newPangkat").value = p.pangkat || "";
       document.getElementById("newStatus").value = p.status || "ASN";
       document.getElementById("valFotoNew").value = p.poto || "";
@@ -1813,7 +1816,7 @@
       document.getElementById("editPegawaiIndex").value = "-1";
       document.getElementById("newNip").value = "";
       document.getElementById("newNama").value = "";
-      document.getElementById("newJabatan").value = "Guru Kelas / Pendidik";
+      document.getElementById("newJabatan").value = "";
       document.getElementById("newPangkat").value = "";
       document.getElementById("newStatus").value = "ASN";
       document.getElementById("valFotoNew").value = "";
@@ -2267,39 +2270,22 @@
         } catch(e) {
           riwayatData = [];
         }
+      } else {
+        riwayatData = [];
       }
 
-      // Jika data kosong, gunakan entri default yang identik dengan sampel (Jumat, 2 Oktober 2026 - SAMSUDIN)
-      if (!riwayatData || riwayatData.length === 0) {
-        riwayatData = [
-          {
-            id: "rw_1",
-            tanggal: "2026-10-02",
-            hariTanggal: "Jumat, 2 Oktober 2026",
-            shift: "Guru: Shift Pagi (06.30 - 14.00)",
-            rentangWaktu: "07:00 - 08:00 WIB",
-            nip: "198105102025211008",
-            nama: "SAMSUDIN",
-            jabatan: "Guru Kelas / Pendidik",
-            pangkat: "Penata Muda / III.a",
-            status: "PPPK",
-            poto: "",
-            ttd: "",
-            kegiatanList: [
-              {
-                jamMulai: "07",
-                menitMulai: "00",
-                jamSelesai: "08",
-                menitSelesai: "00",
-                uraian: "Melaksanakan kegiatan Belajar Mengajar (KBM) interaktif dan pendampingan siswa di kelas.",
-                foto: ""
-              }
-            ]
-          }
-        ];
-        localStorage.setItem("sikawan_riwayatData", JSON.stringify(riwayatData));
+      // Pastikan data riwayat dummy lama (SAMSUDIN / rw_1) dibersihkan / dikosongkan
+      if (Array.isArray(riwayatData)) {
+        riwayatData = riwayatData.filter(r => {
+          const nip = (r.nip || "").trim();
+          const nm = (r.nama || "").toUpperCase();
+          return nip !== "198105102025211008" && !nm.includes("SAMSUDIN") && r.id !== "rw_1";
+        });
+      } else {
+        riwayatData = [];
       }
 
+      localStorage.setItem("sikawan_riwayatData", JSON.stringify(riwayatData));
       updateTotalRiwayatBadge();
       renderTabelRiwayat();
 
@@ -2307,8 +2293,12 @@
         try {
           google.script.run
             .withSuccessHandler(data => {
-              if (data && Array.isArray(data) && data.length > 0) {
-                riwayatData = data.map(item => {
+              if (data && Array.isArray(data)) {
+                riwayatData = data.filter(item => {
+                  const nip = (item.nip || "").trim();
+                  const nm = (item.nama || "").toUpperCase();
+                  return nip !== "198105102025211008" && !nm.includes("SAMSUDIN") && item.id !== "rw_1";
+                }).map(item => {
                   const normTgl = normalizeDateToYMD(item.tanggal);
                   const normHariTgl = item.hariTanggal && !item.hariTanggal.includes("Invalid") ? item.hariTanggal : formatHariTanggalIndo(normTgl);
                   return {
@@ -2329,6 +2319,29 @@
         } catch(e) {
           console.warn("Error calling getDataRiwayatFromSheet:", e);
         }
+      }
+    }
+
+    function kosongkanSemuaRiwayat() {
+      if (!riwayatData || riwayatData.length === 0) {
+        showToast("Riwayat jurnal harian sudah kosong.", "info");
+        return;
+      }
+      if (confirm("Apakah Anda yakin ingin mengosongkan seluruh data riwayat jurnal harian?")) {
+        riwayatData = [];
+        localStorage.setItem("sikawan_riwayatData", JSON.stringify([]));
+        filterRiwayatTabel();
+        updateTotalRiwayatBadge();
+        if (typeof google !== 'undefined' && google.script && google.script.run) {
+          try {
+            google.script.run
+              .withFailureHandler(err => console.warn("GAS kosongkanRiwayatFromSheet error:", err))
+              .kosongkanRiwayatFromSheet();
+          } catch(e) {
+            console.warn("Error calling kosongkanRiwayatFromSheet:", e);
+          }
+        }
+        showToast("Seluruh riwayat jurnal harian berhasil dikosongkan.", "success");
       }
     }
 
@@ -2463,7 +2476,7 @@
       const pIdx = selPegawai.value;
       const pData = (pIdx !== "" && pegawaiData[pIdx]) ? pegawaiData[pIdx] : {};
 
-      const nama = pData.name || document.getElementById("docNama").innerText || "SAMSUDIN";
+      const nama = pData.name || document.getElementById("docNama").innerText || "-";
       const nip = pData.nip || document.getElementById("docNip").innerText || "-";
       const jabatan = pData.jabatan || document.getElementById("docJabatan").innerText || "-";
       const pangkat = pData.pangkat || document.getElementById("docPangkat").innerText || "-";

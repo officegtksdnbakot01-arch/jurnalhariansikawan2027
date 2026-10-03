@@ -360,6 +360,12 @@ function getDataRiwayatFromSheet() {
       var row = data[i];
       if (!row[0] && !row[4]) continue;
 
+      var nip = row[3] ? row[3].toString().trim() : "";
+      var nama = row[4] ? row[4].toString().trim() : "";
+      if (nip === "198105102025211008" || nama.toUpperCase().indexOf("SAMSUDIN") !== -1) {
+        continue;
+      }
+
       var rawTgl = row[1];
       var tanggalStr = formatTanggalYMD(rawTgl);
 
@@ -380,8 +386,8 @@ function getDataRiwayatFromSheet() {
         id: row[0] ? row[0].toString() : "rw_" + i,
         tanggal: tanggalStr,
         hariTanggal: hariTanggalStr,
-        nip: row[3] ? row[3].toString() : "",
-        nama: row[4] ? row[4].toString() : "",
+        nip: nip,
+        nama: nama,
         shift: row[5] ? row[5].toString() : "",
         rentangWaktu: row[6] ? row[6].toString() : "",
         status: row[7] ? row[7].toString() : "",
@@ -394,6 +400,26 @@ function getDataRiwayatFromSheet() {
   } catch (error) {
     Logger.log("Error getDataRiwayatFromSheet: " + error.toString());
     return [];
+  }
+}
+
+/**
+ * Mengosongkan data riwayat jurnal dari sheet "Riwayat Harian"
+ */
+function kosongkanRiwayatFromSheet() {
+  try {
+    var ss = SpreadsheetApp.getActiveSpreadsheet();
+    if (!ss) return { status: "success" };
+    var sheet = ss.getSheetByName("Riwayat Harian");
+    if (!sheet) return { status: "success" };
+    
+    var lastRow = sheet.getLastRow();
+    if (lastRow > 1) {
+      sheet.deleteRows(2, lastRow - 1);
+    }
+    return { status: "success", message: "Riwayat berhasil dikosongkan dari Spreadsheet!" };
+  } catch (error) {
+    return { status: "error", message: "Gagal mengosongkan riwayat: " + error.toString() };
   }
 }
 
