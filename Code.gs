@@ -90,38 +90,38 @@ function getDataPegawaiFromSheet() {
       sheet.appendRow(["11", "197808182008011004", "H. RAHMAT HIDAYATTULLOH, S.Pd", "Guru Kelas", "Penata Tk. I, III/d", "ASN", "", ""]);
       sheet.appendRow(["12", "197606122008012003", "Hj. AISYAH, S.Ag.,M.M", "Guru Kelas", "Penata Tk. I, III/d", "ASN", "", ""]);
       sheet.appendRow(["13", "198802222025212005", "KIKI FUJI LESTARI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["14", "199503092025212087", "LATIPAH, S.Pd", "Guru Kelas", "IX", "PPPK PW", "", ""]);
-      sheet.appendRow(["15", "198506242025211006", "MAHFUDZ, S.Pd.I", "Guru PAI", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["16", "199106182025212013", "MARLINAH, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["17", "198801282025211015", "MUHAMMAD RIDUAN, S.Pd.I", "Guru PAI", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["18", "197212172014082001", "NGATIMAH, S.Pd", "Guru Kelas VI A", "Penata Muda Tk. I, III/b", "ASN", "", ""]);
-      sheet.appendRow(["19", "198808022024212007", "NISA UTAMININGRUM, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["20", "198509062025211010", "NURDIANSYAH, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["21", "197911042025212022", "NURYANIH, S.Pd", "Guru Kelas / Guru PAI", "IX", "PPPK PW", "", ""]);
-      sheet.appendRow(["22", "199201072025212010", "PUTRI ALFIANI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["23", "199509072024211007", "RAFLY BAHRI, S.Pd", "Guru PJOK", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["24", "198104092008012003", "ROCHIZA EFFENDI, S.Pd", "Guru Kelas I C", "Penata, III/c", "ASN", "", ""]);
-      sheet.appendRow(["25", "198411012008012006", "SOPIATI, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
-      sheet.appendRow(["26", "198201272025212007", "SRI SUPRAPTI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["27", "198107252025212007", "SUMARTINI, S.Ag", "Guru PAB", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["28", "198111152008012004", "SURYATUN, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
-      sheet.appendRow(["29", "198511092025211006", "SYAFARUDIN AHMED, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["30", "196707172008012005", "TITIN, S.Pd", "Guru Kelas", "Penata Muda Tk. I, III/b", "ASN", "", ""]);
-      sheet.appendRow(["31", "197801312008012006", "TRI ASTUTY, S.Pd.,M.M", "Guru Kelas I A", "Penata Tk. I, III/d", "ASN", "", ""]);
-      sheet.appendRow(["32", "199404172025212015", "WAHYUNING HARDIYANTI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
-      sheet.appendRow(["33", "197604122007012012", "YAYAH SUTINAH, S.Pd", "Guru Kelas I B", "Penata, III/c", "ASN", "", ""]);
-      sheet.appendRow(["34", "197507292008012008", "YULI HERLIYANTI, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["14", "197808202008012005", "LAILATUL FAJRIAH, S.Pd.SD", "Kepala Sekolah", "Penata Tk. I, III/d", "ASN", "", ""]);
+      sheet.appendRow(["15", "199503092025212087", "LATIPAH, S.Pd", "Guru Kelas", "IX", "PPPK PW", "", ""]);
+      sheet.appendRow(["16", "198506242025211006", "MAHFUDZ, S.Pd.I", "Guru PAI", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["17", "199106182025212013", "MARLINAH, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["18", "198801282025211015", "MUHAMMAD RIDUAN, S.Pd.I", "Guru PAI", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["19", "197212172014082001", "NGATIMAH, S.Pd", "Guru Kelas VI A", "Penata Muda Tk. I, III/b", "ASN", "", ""]);
+      sheet.appendRow(["20", "198808022024212007", "NISA UTAMININGRUM, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["21", "198509062025211010", "NURDIANSYAH, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["22", "197911042025212022", "NURYANIH, S.Pd", "Guru Kelas / Guru PAI", "IX", "PPPK PW", "", ""]);
+      sheet.appendRow(["23", "199201072025212010", "PUTRI ALFIANI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["24", "199509072024211007", "RAFLY BAHRI, S.Pd", "Guru PJOK", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["25", "198104092008012003", "ROCHIZA EFFENDI, S.Pd", "Guru Kelas I C", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["26", "198411012008012006", "SOPIATI, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["27", "198201272025212007", "SRI SUPRAPTI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["28", "198107252025212007", "SUMARTINI, S.Ag", "Guru PAB", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["29", "198111152008012004", "SURYATUN, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["30", "198511092025211006", "SYAFARUDIN AHMED, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["31", "196707172008012005", "TITIN, S.Pd", "Guru Kelas", "Penata Muda Tk. I, III/b", "ASN", "", ""]);
+      sheet.appendRow(["32", "197801312008012006", "TRI ASTUTY, S.Pd.,M.M", "Guru Kelas I A", "Penata Tk. I, III/d", "ASN", "", ""]);
+      sheet.appendRow(["33", "199404172025212015", "WAHYUNING HARDIYANTI, S.Pd", "Guru Kelas", "IX", "PPPK", "", ""]);
+      sheet.appendRow(["34", "197604122007012012", "YAYAH SUTINAH, S.Pd", "Guru Kelas I B", "Penata, III/c", "ASN", "", ""]);
+      sheet.appendRow(["35", "197507292008012008", "YULI HERLIYANTI, S.Pd", "Guru Kelas", "Penata, III/c", "ASN", "", ""]);
     }
     
     var data = sheet.getDataRange().getValues();
     if (data.length <= 1) return [];
 
-    // Hapus LAILATUL FAJRIAH & SAMSUDIN jika sebelumnya pernah masuk ke sheet Data Pegawai
+    // Hapus SAMSUDIN jika sebelumnya pernah masuk ke sheet Data Pegawai
     for (var r = data.length - 1; r >= 1; r--) {
       var rNip = data[r][1] ? data[r][1].toString().trim() : "";
       var rNama = data[r][2] ? data[r][2].toString().trim().toUpperCase() : "";
-      if (rNip === "197808202008012005" || rNama.indexOf("LAILATUL FAJRIAH") !== -1 ||
-          rNip === "198105102025211008" || rNama.indexOf("SAMSUDIN") !== -1) {
+      if (rNip === "198105102025211008" || rNama.indexOf("SAMSUDIN") !== -1) {
         sheet.deleteRow(r + 1);
         data = sheet.getDataRange().getValues();
       }
@@ -142,6 +142,7 @@ function getDataPegawaiFromSheet() {
       ["197808182008011004", "H. RAHMAT HIDAYATTULLOH, S.Pd", "Guru Kelas", "Penata Tk. I, III/d", "ASN"],
       ["197606122008012003", "Hj. AISYAH, S.Ag.,M.M", "Guru Kelas", "Penata Tk. I, III/d", "ASN"],
       ["198802222025212005", "KIKI FUJI LESTARI, S.Pd", "Guru Kelas", "IX", "PPPK"],
+      ["197808202008012005", "LAILATUL FAJRIAH, S.Pd.SD", "Kepala Sekolah", "Penata Tk. I, III/d", "ASN"],
       ["199503092025212087", "LATIPAH, S.Pd", "Guru Kelas", "IX", "PPPK PW"],
       ["198506242025211006", "MAHFUDZ, S.Pd.I", "Guru PAI", "IX", "PPPK"],
       ["199106182025212013", "MARLINAH, S.Pd", "Guru Kelas", "IX", "PPPK"],
@@ -202,9 +203,8 @@ function getDataPegawaiFromSheet() {
       var nip = row[1] ? row[1].toString().trim() : "";
       var nama = row[2] ? row[2].toString().trim() : "";
       
-      // Lewatkan jika LAILATUL FAJRIAH (khusus Data Sekolah) atau SAMSUDIN
-      if (nip === "197808202008012005" || nama.toUpperCase().indexOf("LAILATUL FAJRIAH") !== -1 ||
-          nip === "198105102025211008" || nama.toUpperCase().indexOf("SAMSUDIN") !== -1) {
+      // Lewatkan jika SAMSUDIN
+      if (nip === "198105102025211008" || nama.toUpperCase().indexOf("SAMSUDIN") !== -1) {
         continue;
       }
 
