@@ -491,16 +491,29 @@
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
           <input type="text" id="cariRiwayat" oninput="filterRiwayatTabel()" placeholder="Cari Nama Pegawai / NIP / Hari..." class="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-800 placeholder-gray-400 outline-none focus:border-blue-500 focus:bg-white transition">
         </div>
-        <div class="flex items-center gap-2 self-end md:self-auto">
-          <span class="text-xs text-gray-600 font-medium flex items-center gap-1.5">
-            <i class="fa-solid fa-filter text-gray-500"></i> Status:
-          </span>
-          <select id="filterStatusRiwayat" onchange="filterRiwayatTabel()" class="px-3 py-2 border border-gray-300 rounded-xl text-xs bg-white font-medium text-gray-700 outline-none cursor-pointer">
-            <option value="">Semua Status</option>
-            <option value="ASN">ASN</option>
-            <option value="PPPK">PPPK</option>
-            <option value="PPPK PW">PPPK PW</option>
-          </select>
+        <div class="flex items-center gap-2.5 self-end md:self-auto flex-wrap">
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs text-gray-600 font-medium flex items-center gap-1">
+              <i class="fa-solid fa-filter text-gray-500"></i> Status:
+            </span>
+            <select id="filterStatusRiwayat" onchange="filterRiwayatTabel()" class="px-2.5 py-2 border border-gray-300 rounded-xl text-xs bg-white font-medium text-gray-700 outline-none cursor-pointer">
+              <option value="">Semua Status</option>
+              <option value="ASN">ASN</option>
+              <option value="PPPK">PPPK</option>
+              <option value="PPPK PW">PPPK PW</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs text-gray-600 font-medium flex items-center gap-1">
+              <i class="fa-solid fa-list-ol text-blue-600"></i> Tampilkan:
+            </span>
+            <select id="riwayatPageSizeSelect" onchange="ubahPageSizeRiwayat(this.value)" class="px-2.5 py-2 border border-blue-300 rounded-xl text-xs bg-blue-50/70 font-bold text-blue-900 outline-none cursor-pointer focus:ring-2 focus:ring-blue-400 shadow-2xs">
+              <option value="25" selected>1 - 25 Baris (Standar)</option>
+              <option value="50">1 - 50 Baris</option>
+              <option value="100">1 - 100 Baris</option>
+              <option value="all">Semua Baris</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -525,10 +538,14 @@
           </table>
         </div>
         
-        <!-- Footer Tabel Riwayat -->
-        <div class="p-3.5 bg-gray-50 border-t border-gray-200 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-2">
-          <span id="footerCountRiwayat">Menampilkan 1 riwayat jurnal</span>
-          <span class="font-medium text-gray-400">SIKAWAN SDN Babelan Kota 01 Tahun 2026</span>
+        <!-- Footer Tabel Riwayat dengan Paginasi 1-25 Baris -->
+        <div class="p-3.5 bg-gray-50 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 gap-3">
+          <div class="flex items-center gap-2">
+            <span id="footerCountRiwayat" class="font-bold text-gray-800">Menampilkan 1 - 25 dari 25 riwayat jurnal</span>
+          </div>
+          <div id="riwayatPaginationNav" class="flex items-center gap-1.5 flex-wrap justify-center">
+            <!-- Navigasi tombol paginasi -->
+          </div>
         </div>
       </div>
     </div>
@@ -2289,6 +2306,8 @@
     // SISTEM RIWAYAT JURNAL HARIAN PEGAWAI
     // ==========================================
     let riwayatData = [];
+    let riwayatCurrentPage = 1;
+    let riwayatPageSize = 25;
 
     function formatHariTanggalIndo(dateStr) {
       if (!dateStr) return "-";
@@ -2308,11 +2327,103 @@
       return clean.slice(0, 2).toUpperCase() || "SA";
     }
 
+    // Helper simpan ke localStorage dengan proteksi kuota penyimpanan browser
+    function simpanRiwayatKeLocalStorage() {
+      try {
+        localStorage.setItem("sikawan_riwayatData", JSON.stringify(riwayatData));
+      } catch (e) {
+        console.warn("Storage quota limit reached, saving optimized copy:", e);
+        try {
+          const optimized = riwayatData.slice(0, 150).map(r => ({
+            ...r,
+            kegiatanList: (r.kegiatanList || []).map(k => ({
+              ...k,
+              foto: (k.foto && k.foto.length > 2500) ? k.foto.substring(0, 2500) : k.foto
+            }))
+          }));
+          localStorage.setItem("sikawan_riwayatData", JSON.stringify(optimized));
+        } catch (err2) {
+          console.error("Gagal simpan localStorage riwayat:", err2);
+        }
+      }
+    }
+
+    // Menggabungkan data riwayat lokal dan spreadsheet secara cerdas tanpa menghapus data yang tersimpan
+    function gabungRiwayatData(localList, sheetList) {
+      const map = new Map();
+
+      // Masukkan data lokal terlebih dahulu
+      (localList || []).forEach(item => {
+        if (!item) return;
+        const key = (item.nip && item.tanggal) ? `${item.nip}_${normalizeDateToYMD(item.tanggal)}` : (item.id || String(Math.random()));
+        map.set(key, item);
+      });
+
+      // Gabungkan data dari sheet
+      (sheetList || []).forEach(item => {
+        if (!item) return;
+        const normTgl = normalizeDateToYMD(item.tanggal);
+        const key = (item.nip && normTgl) ? `${item.nip}_${normTgl}` : (item.id || String(Math.random()));
+        
+        if (!map.has(key)) {
+          map.set(key, item);
+        } else {
+          const existing = map.get(key);
+          const existingKeg = existing.kegiatanList || [];
+          const incomingKeg = item.kegiatanList || [];
+          map.set(key, {
+            ...item,
+            ...existing,
+            kegiatanList: existingKeg.length >= incomingKeg.length ? existingKeg : incomingKeg
+          });
+        }
+      });
+
+      const merged = Array.from(map.values());
+      // Urutkan tanggal terbaru di posisi paling atas
+      merged.sort((a, b) => {
+        const tglA = a.tanggal || "";
+        const tglB = b.tanggal || "";
+        return tglB.localeCompare(tglA);
+      });
+      return merged;
+    }
+
+    // Otomatis sinkronkan riwayat lokal ke spreadsheet jika belum tercatat di spreadsheet
+    function sinkronkanRiwayatLokalKeSheet(localList, sheetList) {
+      if (typeof google === 'undefined' || !google.script || !google.script.run) return;
+      const sheetKeys = new Set((sheetList || []).map(s => `${s.nip}_${normalizeDateToYMD(s.tanggal)}`));
+      
+      const pendingToSheet = (localList || []).filter(item => {
+        const key = `${item.nip}_${normalizeDateToYMD(item.tanggal)}`;
+        return !sheetKeys.has(key);
+      });
+
+      // Kirim entri yang belum ada ke sheet (maksimal 10 entri sekali jalan agar hemat kuota)
+      pendingToSheet.slice(0, 10).forEach(entry => {
+        try {
+          google.script.run
+            .withFailureHandler(err => console.warn("Sinkron entri ke sheet gagal:", err))
+            .simpanDataRiwayatToSheet(entry);
+        } catch(e) {}
+      });
+    }
+
     function loadRiwayatData() {
+      // 1. Muat dari localStorage TERLEBIH DAHULU agar langsung tampil secara permanen dan tidak hilang saat refresh
       const cached = localStorage.getItem("sikawan_riwayatData");
       if (cached) {
         try {
-          riwayatData = JSON.parse(cached);
+          const parsed = JSON.parse(cached);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            riwayatData = parsed.filter(r => {
+              const nip = (r.nip || "").trim();
+              const nm = (r.nama || "").toUpperCase();
+              return nip !== "198105102025211008" && !nm.includes("SAMSUDIN") && r.id !== "rw_1";
+            });
+          } else {
+            riwayatData = [];
+          }
         } catch(e) {
           riwayatData = [];
         }
@@ -2320,27 +2431,24 @@
         riwayatData = [];
       }
 
-      // Pastikan data riwayat dummy lama (SAMSUDIN / rw_1) dibersihkan / dikosongkan
-      if (Array.isArray(riwayatData)) {
-        riwayatData = riwayatData.filter(r => {
-          const nip = (r.nip || "").trim();
-          const nm = (r.nama || "").toUpperCase();
-          return nip !== "198105102025211008" && !nm.includes("SAMSUDIN") && r.id !== "rw_1";
-        });
-      } else {
-        riwayatData = [];
-      }
+      // Pastikan urutan tanggal terbaru di atas
+      riwayatData.sort((a, b) => {
+        const tglA = a.tanggal || "";
+        const tglB = b.tanggal || "";
+        return tglB.localeCompare(tglA);
+      });
 
-      localStorage.setItem("sikawan_riwayatData", JSON.stringify(riwayatData));
+      simpanRiwayatKeLocalStorage();
       updateTotalRiwayatBadge();
       renderTabelRiwayat();
 
+      // 2. Hubungi Google Apps Script untuk sinkronisasi dua arah tanpa menghapus data lokal
       if (typeof google !== 'undefined' && google.script && google.script.run) {
         try {
           google.script.run
-            .withSuccessHandler(data => {
-              if (data && Array.isArray(data)) {
-                riwayatData = data.filter(item => {
+            .withSuccessHandler(dataSheet => {
+              if (dataSheet && Array.isArray(dataSheet)) {
+                const cleanSheet = dataSheet.filter(item => {
                   const nip = (item.nip || "").trim();
                   const nm = (item.nama || "").toUpperCase();
                   return nip !== "198105102025211008" && !nm.includes("SAMSUDIN") && item.id !== "rw_1";
@@ -2353,13 +2461,22 @@
                     hariTanggal: normHariTgl
                   };
                 });
-                localStorage.setItem("sikawan_riwayatData", JSON.stringify(riwayatData));
+
+                // Gabungkan data lokal dan sheet secara aman (TIDAK AKAN MENGOSONGKAN data lokal jika sheet kosong)
+                riwayatData = gabungRiwayatData(riwayatData, cleanSheet);
+                simpanRiwayatKeLocalStorage();
                 updateTotalRiwayatBadge();
                 renderTabelRiwayat();
+
+                // Sinkronkan data lokal yang belum ada di sheet
+                sinkronkanRiwayatLokalKeSheet(riwayatData, cleanSheet);
               }
             })
             .withFailureHandler(err => {
               console.warn("GAS getDataRiwayatFromSheet error:", err);
+              // Data lokal tetap utuh dan aman
+              updateTotalRiwayatBadge();
+              renderTabelRiwayat();
             })
             .getDataRiwayatFromSheet();
         } catch(e) {
@@ -2375,7 +2492,8 @@
       }
       if (confirm("Apakah Anda yakin ingin mengosongkan seluruh data riwayat jurnal harian?")) {
         riwayatData = [];
-        localStorage.setItem("sikawan_riwayatData", JSON.stringify([]));
+        riwayatCurrentPage = 1;
+        simpanRiwayatKeLocalStorage();
         filterRiwayatTabel();
         updateTotalRiwayatBadge();
         if (typeof google !== 'undefined' && google.script && google.script.run) {
@@ -2398,6 +2516,23 @@
       }
     }
 
+    function ubahPageSizeRiwayat(val) {
+      if (val === 'all') {
+        riwayatPageSize = 999999;
+      } else {
+        riwayatPageSize = parseInt(val, 10) || 25;
+      }
+      riwayatCurrentPage = 1;
+      filterRiwayatTabel();
+    }
+
+    function gantiHalamanRiwayat(page) {
+      riwayatCurrentPage = page;
+      filterRiwayatTabel();
+      const el = document.getElementById("riwayat");
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
     function filterRiwayatTabel() {
       const query = (document.getElementById("cariRiwayat").value || "").toLowerCase().trim();
       const statusFilter = document.getElementById("filterStatusRiwayat").value;
@@ -2410,6 +2545,14 @@
       tbody.innerHTML = "";
 
       let list = [...riwayatData];
+
+      // Urutkan tanggal terbaru di posisi teratas
+      list.sort((a, b) => {
+        const tglA = a.tanggal || "";
+        const tglB = b.tanggal || "";
+        return tglB.localeCompare(tglA);
+      });
+
       if (searchQuery) {
         list = list.filter(r => 
           (r.nama && r.nama.toLowerCase().includes(searchQuery)) ||
@@ -2422,7 +2565,21 @@
         list = list.filter(r => r.status === statusFilter);
       }
 
-      if (list.length === 0) {
+      const totalEntries = list.length;
+      const pageSize = riwayatPageSize;
+      const totalPages = Math.ceil(totalEntries / pageSize) || 1;
+
+      if (riwayatCurrentPage > totalPages) riwayatCurrentPage = totalPages;
+      if (riwayatCurrentPage < 1) riwayatCurrentPage = 1;
+
+      const startIndex = (riwayatCurrentPage - 1) * pageSize;
+      const endIndex = Math.min(startIndex + pageSize, totalEntries);
+      const pageItems = list.slice(startIndex, endIndex);
+
+      // Render Paginasi Kontrol
+      renderPaginationControls(totalPages, totalEntries, startIndex, endIndex);
+
+      if (pageItems.length === 0) {
         tbody.innerHTML = `
           <tr>
             <td colspan="7" class="p-8 text-center text-gray-500">
@@ -2436,7 +2593,8 @@
         return;
       }
 
-      list.forEach((row, idx) => {
+      pageItems.forEach((row, idx) => {
+        const rowNumber = startIndex + idx + 1;
         const initials = getInitials(row.nama);
         const countKegiatan = row.kegiatanList ? row.kegiatanList.length : 1;
         
@@ -2452,7 +2610,7 @@
         const tr = document.createElement("tr");
         tr.className = "hover:bg-blue-50/40 transition duration-150";
         tr.innerHTML = `
-          <td class="p-3.5 text-center font-medium text-gray-700 border-r border-gray-100">${idx + 1}</td>
+          <td class="p-3.5 text-center font-bold text-blue-900 border-r border-gray-100">${rowNumber}</td>
           <td class="p-3.5 border-r border-gray-100">
             <div class="font-bold text-gray-900">${row.hariTanggal}</div>
             <div class="text-[11px] text-gray-500 flex items-center gap-1.5 mt-0.5 font-medium">
@@ -2494,9 +2652,68 @@
         `;
         tbody.appendChild(tr);
       });
+    }
 
+    function renderPaginationControls(totalPages, totalEntries, startIndex, endIndex) {
       const footerCount = document.getElementById("footerCountRiwayat");
-      if (footerCount) footerCount.innerText = `Menampilkan ${list.length} riwayat jurnal`;
+      if (footerCount) {
+        if (totalEntries === 0) {
+          footerCount.innerText = `Menampilkan 0 riwayat jurnal`;
+        } else {
+          footerCount.innerHTML = `Menampilkan <span class="text-blue-900 font-extrabold">${startIndex + 1} - ${endIndex}</span> dari <span class="text-blue-900 font-extrabold">${totalEntries}</span> riwayat jurnal`;
+        }
+      }
+
+      const nav = document.getElementById("riwayatPaginationNav");
+      if (!nav) return;
+      nav.innerHTML = "";
+
+      if (totalEntries <= riwayatPageSize && totalPages <= 1) {
+        return;
+      }
+
+      // Tombol Sebelumnya
+      const btnPrev = document.createElement("button");
+      btnPrev.innerHTML = `<i class="fa-solid fa-chevron-left text-[10px]"></i> Sebelumnya`;
+      btnPrev.className = `px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition ${
+        riwayatCurrentPage <= 1 
+          ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200" 
+          : "bg-white text-blue-900 hover:bg-blue-50 border border-blue-300 shadow-2xs cursor-pointer active:scale-95"
+      }`;
+      btnPrev.disabled = riwayatCurrentPage <= 1;
+      btnPrev.onclick = () => gantiHalamanRiwayat(riwayatCurrentPage - 1);
+      nav.appendChild(btnPrev);
+
+      // Angka Halaman
+      let startPage = Math.max(1, riwayatCurrentPage - 2);
+      let endPage = Math.min(totalPages, startPage + 4);
+      if (endPage - startPage < 4) {
+        startPage = Math.max(1, endPage - 4);
+      }
+
+      for (let p = startPage; p <= endPage; p++) {
+        const btnPage = document.createElement("button");
+        btnPage.innerText = p;
+        btnPage.className = `w-8 h-8 rounded-lg text-xs font-bold flex items-center justify-center transition ${
+          p === riwayatCurrentPage
+            ? "bg-blue-900 text-white shadow-xs"
+            : "bg-white text-gray-700 hover:bg-blue-50 border border-gray-200 cursor-pointer"
+        }`;
+        btnPage.onclick = () => gantiHalamanRiwayat(p);
+        nav.appendChild(btnPage);
+      }
+
+      // Tombol Selanjutnya
+      const btnNext = document.createElement("button");
+      btnNext.innerHTML = `Selanjutnya <i class="fa-solid fa-chevron-right text-[10px]"></i>`;
+      btnNext.className = `px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition ${
+        riwayatCurrentPage >= totalPages 
+          ? "bg-gray-100 text-gray-400 cursor-not-allowed border border-gray-200" 
+          : "bg-white text-blue-900 hover:bg-blue-50 border border-blue-300 shadow-2xs cursor-pointer active:scale-95"
+      }`;
+      btnNext.disabled = riwayatCurrentPage >= totalPages;
+      btnNext.onclick = () => gantiHalamanRiwayat(riwayatCurrentPage + 1);
+      nav.appendChild(btnNext);
     }
 
     function bukaJurnalBaru() {
@@ -2589,12 +2806,24 @@
         riwayatData.unshift(newEntry);
       }
 
-      localStorage.setItem("sikawan_riwayatData", JSON.stringify(riwayatData));
+      // Urutkan riwayat sehingga jurnal tanggal terbaru selalu di posisi paling atas
+      riwayatData.sort((a, b) => {
+        const tglA = a.tanggal || "";
+        const tglB = b.tanggal || "";
+        return tglB.localeCompare(tglA);
+      });
+
+      simpanRiwayatKeLocalStorage();
+      riwayatCurrentPage = 1; // Langsung ke halaman 1 agar baris 1-25 menampilkan entri terbaru di nomor urut 1
       updateTotalRiwayatBadge();
+      renderTabelRiwayat();
 
       if (typeof google !== 'undefined' && google.script && google.script.run) {
         try {
           google.script.run
+            .withSuccessHandler(res => {
+              console.log("GAS simpanDataRiwayatToSheet sukses:", res);
+            })
             .withFailureHandler(err => {
               console.warn("GAS simpanDataRiwayatToSheet error:", err);
             })
@@ -2815,7 +3044,7 @@
         const targetId = pendingHapus.id;
 
         riwayatData = riwayatData.filter(r => r.id !== targetId);
-        localStorage.setItem("sikawan_riwayatData", JSON.stringify(riwayatData));
+        simpanRiwayatKeLocalStorage();
         filterRiwayatTabel();
         updateTotalRiwayatBadge();
 

@@ -458,6 +458,14 @@ function getDataRiwayatFromSheet() {
         kegiatanList: kegiatanList
       });
     }
+
+    // Urutkan riwayat berdasarkan tanggal terbaru (descending)
+    riwayatList.sort(function(a, b) {
+      var tglA = (a.tanggal || "").toString();
+      var tglB = (b.tanggal || "").toString();
+      return tglB.localeCompare(tglA);
+    });
+
     return riwayatList;
   } catch (error) {
     Logger.log("Error getDataRiwayatFromSheet: " + error.toString());
@@ -536,6 +544,20 @@ function simpanDataRiwayatToSheet(payload) {
     }
 
     var kegiatanJson = JSON.stringify(payload.kegiatanList || []);
+    // Cegah limit ukuran sel di Google Spreadsheet (50.000 karakter)
+    if (kegiatanJson.length > 45000) {
+      var compactList = (payload.kegiatanList || []).map(function(k) {
+        return {
+          jamMulai: k.jamMulai || "",
+          menitMulai: k.menitMulai || "",
+          jamSelesai: k.jamSelesai || "",
+          menitSelesai: k.menitSelesai || "",
+          uraian: k.uraian || "",
+          foto: k.foto ? (k.foto.length > 500 ? k.foto.substring(0, 500) : k.foto) : ""
+        };
+      });
+      kegiatanJson = JSON.stringify(compactList);
+    }
     var rowData = [
       payload.id || ("rw_" + new Date().getTime()),
       cleanTanggal,
